@@ -49,7 +49,7 @@ namespace VeeamTestTask
             }
         }
         /// <summary>
-        /// Compare hash between file and 
+        /// Compare hash between file and source data
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
