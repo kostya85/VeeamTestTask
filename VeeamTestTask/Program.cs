@@ -48,7 +48,11 @@ namespace VeeamTestTask
                 }
             }
         }
-
+        /// <summary>
+        /// Compare hash between file and 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static Result CheckFile(FileModel file)
         {
             if (!File.Exists(file.Path)) return Result.NOT_FOUND;
@@ -72,26 +76,53 @@ namespace VeeamTestTask
             }
            
         }
+        /// <summary>
+        /// Gets a hash of the file using SHA256.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static string GetSHA256Hash(string filePath)
         {
             using (var sha256 = new SHA256CryptoServiceProvider())
                 return GetHash(filePath, sha256);
         }
+        /// <summary>
+        /// Gets a hash of the file using SHA1.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static string GetSHA1Hash(string filePath)
         {
             using (var sha1 = new SHA1CryptoServiceProvider())
                 return GetHash(filePath, sha1);
         }
+        /// <summary>
+        /// Gets a hash of the file using MD5.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static string GetMD5Hash(string filePath)
         {
             using (var md5 = new MD5CryptoServiceProvider())
                 return GetHash(filePath, md5);
         }
+        /// <summary>
+        /// Represent a file as FileStream
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="hasher"></param>
+        /// <returns></returns>
         private static string GetHash(string filePath, HashAlgorithm hasher)
         {
             using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 return GetHash(fs, hasher);
         }
+        /// <summary>
+        /// Calculate hash from FileStream
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="hasher"></param>
+        /// <returns></returns>
         private static string GetHash(Stream s, HashAlgorithm hasher)
         {
             var hash = hasher.ComputeHash(s);
