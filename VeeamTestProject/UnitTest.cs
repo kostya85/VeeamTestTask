@@ -24,7 +24,7 @@ namespace VeeamTestProject
         [TestMethod]
         public void CorrectHashSum()
         {
-            FileModel file = new FileModel("файл_04.txt", "sha1", "M48mP1ZCGv1NHvrdeU4h7a9XwY8");
+            FileModel file = new FileModel("файл_04.txt", "sha1", "338f263f56421afd4d1efadd794e21edaf57c18f");
             Assert.AreEqual(Result.OK, Program.CheckFile(file));
         }
     }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
+
 namespace VeeamTestTask
 {
     public class Program
@@ -126,8 +128,7 @@ namespace VeeamTestTask
         private static string GetHash(Stream s, HashAlgorithm hasher)
         {
             var hash = hasher.ComputeHash(s);
-            var hashStr = Convert.ToBase64String(hash);
-            return hashStr.TrimEnd('=');
+            return BitConverter.ToString(hash).Replace("-", String.Empty).ToLower();
         }
 
 
@@ -150,7 +151,7 @@ namespace VeeamTestTask
         {
             Path = path;
             
-            HashSum = hashSum;
+            HashSum = hashSum.ToLower();
 
             switch (method)
             {
